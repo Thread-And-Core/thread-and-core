@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CoreSphere from "@/components/CoreSphere";
+import FrameworkDiagram from "@/components/FrameworkDiagram";
 import Reveal from "@/components/Reveal";
 import SectionRule from "@/components/SectionRule";
 
@@ -173,10 +174,24 @@ export default function FrameworkPage() {
         </div>
       </section>
 
-      {/* The five phases */}
+      {/* The method, in motion */}
       <section className="bg-ink-950">
         <div className="container-site py-24">
-          <SectionRule index="02" label="Five Phases, One Method" />
+          <SectionRule index="02" label="The Method, in Motion" />
+          <Reveal>
+            <FrameworkDiagram className="my-6" />
+            <p className="mx-auto mt-8 max-w-xl text-center text-[14.5px] leading-relaxed text-fg-secondary">
+              One continuous thread through five phases, ending at the core.
+              The same movement on every engagement — only the scale changes.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The five phases */}
+      <section>
+        <div className="container-site py-24">
+          <SectionRule index="03" label="Five Phases, One Method" />
           <div className="divide-y divide-hairline border-y border-hairline">
             {PHASES.map((phase, i) => (
               <Reveal key={phase.name}>
@@ -211,7 +226,7 @@ export default function FrameworkPage() {
       </section>
 
       {/* CTA */}
-      <section>
+      <section className="bg-ink-950">
         <div className="container-site py-28">
           <div className="mx-auto max-w-2xl text-center">
             <Reveal>

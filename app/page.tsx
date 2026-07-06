@@ -97,7 +97,7 @@ export default function Home() {
             <SectionRule index="05" label="Enterprise Experience" />
             <Reveal>
               <h2 className="max-w-2xl text-[clamp(1.9rem,3.6vw,3rem)] font-bold leading-tight tracking-[-0.01em] text-core-white">
-                Proof, not presentations.
+                Production systems. Real constraints. Measured outcomes.
               </h2>
               <p className="mt-4 max-w-xl leading-relaxed text-fg-secondary">
                 Experience gained delivering enterprise transformation

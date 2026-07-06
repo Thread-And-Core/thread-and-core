@@ -6,33 +6,33 @@ import SectionRule from "@/components/SectionRule";
 const THREADS = [
   {
     name: "Business",
-    line: "Process design and transformation on a clean digital core.",
+    line: "Process design and transformation on a clean digital core. We map how the business actually runs — then shape SAP processes to fit it, not the other way around.",
     stack: ["SAP", "Process Design", "Transformation", "Clean Core", "S/4HANA"],
-    proof: "16-step field process reduced to a single click.",
+    proof: "Business processes redesigned behind a 4-region, 7-language global rollout.",
   },
   {
     name: "Technology",
-    line: "Cloud-native engineering and architecture that holds at enterprise scale.",
+    line: "Cloud-native engineering and architecture that holds at enterprise scale — BTP, CAPM, and full-stack delivery designed as one system, not a stack of parts.",
     stack: ["Cloud", "Architecture", "BTP", "CAPM", "React", "Node.js"],
-    proof: "Production platforms live across 4 regions.",
+    proof: "Production platforms architected and shipped across Australia, Germany, and India.",
   },
   {
     name: "Intelligence",
-    line: "AI that earns its place in the workflow, not the slide deck.",
+    line: "AI only where it survives production: forecasting, copilots, RAG, and analytics wired into real workflows — never bolted on for the demo.",
     stack: ["AI", "Analytics", "RAG", "GenAI", "SAP AI Core", "Forecasting"],
-    proof: "AI forecasting live in industrial field operations.",
+    proof: "AI demand forecasting running live inside industrial field operations.",
   },
   {
     name: "Integration",
-    line: "Systems that speak to each other by design, not by exception.",
+    line: "Systems that speak to each other by design, not by exception — APIs, events, and middleware with contracts that hold when either side changes.",
     stack: ["APIs", "Events", "Middleware", "OData", "SAP Integration Suite"],
-    proof: "PO-to-SO automation across enterprise boundaries.",
+    proof: "PO-to-SO automation flowing across enterprise boundaries without manual re-entry.",
   },
   {
     name: "Experience",
-    line: "Interfaces field teams actually use — offline included.",
+    line: "Interfaces field teams actually use — mobile, offline-first, and multilingual from day one, because the plant floor doesn't have perfect Wi-Fi.",
     stack: ["Mobile", "Web", "UX", "Fiori", "SAP Build", "Offline-first"],
-    proof: "Operator workflows delivered in 7 languages.",
+    proof: "A 16-step operator process reduced to a single click, in 7 languages.",
   },
 ];
 
@@ -90,8 +90,11 @@ export default function Capabilities() {
                     <p className="mt-4 font-mono text-[11.5px] tracking-[0.08em] text-slate-accent uppercase">
                       {t.stack.join(" · ")}
                     </p>
-                    <p className="mt-3 font-mono text-[12px] tracking-[0.06em] text-thread-300">
-                      {t.proof}
+                    <p className="mt-4 font-mono text-[12px] leading-relaxed tracking-[0.06em]">
+                      <span className="text-fg-muted uppercase">
+                        In practice —{" "}
+                      </span>
+                      <span className="text-thread-300">{t.proof}</span>
                     </p>
                   </div>
                 </div>

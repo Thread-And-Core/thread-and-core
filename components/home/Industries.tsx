@@ -1,36 +1,45 @@
+import Link from "next/link";
 import SectionRule from "@/components/SectionRule";
 
 const TILES = [
   {
     name: "Mining & Explosives",
+    desc: "Field operations & logistics",
     proof: "Field operations platform — 4 regions, 7 languages, live.",
   },
   {
     name: "Healthcare",
+    desc: "Clinical workflows & AI notes",
     proof: "Patient workflows with AI clinical notes, in production.",
   },
   {
     name: "Hospital & Pharma",
+    desc: "Care & inventory operations",
     proof: "Care and inventory operations under real constraints.",
   },
   {
     name: "Manufacturing & Supply Chain",
+    desc: "Order automation & visibility",
     proof: "PO-to-SO automation across enterprise boundaries.",
   },
   {
     name: "Oil & Gas",
+    desc: "Industrial operations systems",
     proof: "Enterprise systems delivered for industrial operations.",
   },
   {
     name: "HR & Talent",
+    desc: "Talent processes & analytics",
     proof: "Talent platform delivery at enterprise scale.",
   },
   {
     name: "Enterprise Analytics",
+    desc: "System intelligence & dashboards",
     proof: "45,000+ objects classified across 15+ SAP systems.",
   },
   {
     name: "Veterinary & Pet Health",
+    desc: "Clinic management",
     proof: "Clinic management platform, live with practitioners.",
   },
 ];
@@ -76,33 +85,45 @@ export default function Industries() {
   return (
     <section className="bg-ink-950">
       <div className="container-site py-28 md:pl-40">
-      <SectionRule index="04" label="Where We've Delivered" />
-      <h2 className="max-w-2xl text-[clamp(1.9rem,3.6vw,3rem)] font-bold leading-tight tracking-[-0.01em] text-core-white">
-        Every engagement is anchored in the business.
-      </h2>
-      <p className="mt-4 max-w-xl leading-relaxed text-fg-secondary">
-        Every sector below is one where production software has been delivered
-        against real enterprise constraints.
-      </p>
+        <SectionRule index="04" label="Where We've Delivered" />
+        <h2 className="max-w-2xl text-[clamp(1.9rem,3.6vw,3rem)] font-bold leading-tight tracking-[-0.01em] text-core-white">
+          Every engagement is anchored in the business.
+        </h2>
+        <p className="mt-4 max-w-xl leading-relaxed text-fg-secondary">
+          Every sector below is one where production software has been
+          delivered against real enterprise constraints.
+        </p>
 
-      <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {TILES.map((tile, i) => (
-          <div
-            key={tile.name}
-            className="group relative aspect-[4/3] overflow-hidden rounded-[3px] border border-hairline bg-ink-800 transition-colors duration-500 hover:border-thread-500/60"
-          >
-            <Woven seed={i + 1} />
-            <div className="absolute inset-x-0 bottom-0 p-5">
-              <p className="text-[15px] font-bold text-core-white transition-transform duration-500 group-hover:-translate-y-1">
-                {tile.name}
+        <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {TILES.map((tile, i) => (
+            <Link
+              key={tile.name}
+              href="/work"
+              className="group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-[3px] border border-hairline bg-ink-800 p-5 transition-colors duration-500 hover:border-thread-500/60"
+            >
+              <Woven seed={i + 1} />
+              <p className="relative font-mono text-[11px] tracking-[0.14em] text-fg-muted transition-colors duration-500 group-hover:text-thread-500">
+                0{i + 1}
               </p>
-              <p className="mt-1 max-h-0 font-mono text-[10.5px] leading-relaxed tracking-[0.04em] text-fg-secondary opacity-0 transition-all duration-500 group-hover:max-h-16 group-hover:opacity-100">
-                {tile.proof}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+              <div className="relative">
+                <p className="text-[15px] leading-snug font-bold text-core-white">
+                  {tile.name}
+                </p>
+                <p className="mt-1 font-mono text-[10px] tracking-[0.08em] text-fg-muted uppercase">
+                  {tile.desc}
+                </p>
+                <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:mt-3 group-hover:max-h-24 group-hover:opacity-100">
+                  <p className="font-mono text-[10.5px] leading-relaxed tracking-[0.04em] text-fg-secondary">
+                    {tile.proof}
+                  </p>
+                  <p className="mt-2 font-mono text-[10px] tracking-[0.16em] text-thread-300 uppercase">
+                    See the work →
+                  </p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

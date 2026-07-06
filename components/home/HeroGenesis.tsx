@@ -71,9 +71,9 @@ function HeroCopy({ itemClass }: { itemClass: string }) {
         className={`mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-fg-secondary ${itemClass}`}
         data-i="3"
       >
-        We connect enterprise processes, applications, data, automation, and
-        intelligence into systems that scale — led by the architect who
-        delivers them.
+        We turn scattered processes, applications, data, and AI into one
+        connected architecture — built and owned in production by the
+        architect you first speak to.
       </p>
       <div className={`mt-9 flex flex-wrap gap-4 ${itemClass}`} data-i="4">
         <Link href="/contact" className="btn-primary">
@@ -215,10 +215,12 @@ export default function HeroGenesis() {
           const A = wp[PAIRS[k][0]];
           const B = wp[PAIRS[k][1]];
           if (A.al <= 0 || B.al <= 0) continue;
+          const ay = A.y + 12;
+          const by = B.y + 12;
           const mx = (A.x + B.x) / 2;
-          const my = (A.y + B.y) / 2;
+          const my = (ay + by) / 2;
           const dx = B.x - A.x;
-          const dy = B.y - A.y;
+          const dy = by - ay;
           const nl = Math.hypot(dx, dy) || 1;
           const off = 26 * Math.sin(k * 2.1 + 1);
           const qx = mx + (dy / nl) * off;
@@ -226,12 +228,12 @@ export default function HeroGenesis() {
           ctx.globalAlpha = pr * la * 0.7;
           ctx.setLineDash([nl * 1.15 * pr, 99999]);
           ctx.beginPath();
-          ctx.moveTo(A.x, A.y);
-          ctx.quadraticCurveTo(qx, qy, B.x, B.y);
+          ctx.moveTo(A.x, ay);
+          ctx.quadraticCurveTo(qx, qy, B.x, by);
           ctx.stroke();
           ctx.setLineDash([]);
           if (pr < 1) {
-            const [hx, hy] = quadPoint(A.x, A.y, qx, qy, B.x, B.y, pr);
+            const [hx, hy] = quadPoint(A.x, ay, qx, qy, B.x, by, pr);
             ctx.globalAlpha = la;
             ctx.fillStyle = "#F0C987";
             ctx.beginPath();
@@ -253,12 +255,28 @@ export default function HeroGenesis() {
         ctx.globalAlpha = word.al;
         ctx.fillStyle = "#EDE7DC";
         ctx.fillText(WORDS[i][0], word.x, word.y);
-        ctx.globalAlpha = word.al * 0.4;
-        ctx.strokeStyle = "#D99A4E";
+        const dotY = word.y + 12;
+        const pulse = 0.55 + 0.35 * Math.sin(tm * 2 + i * 1.3);
+        ctx.globalAlpha = word.al * pulse;
+        ctx.fillStyle = "#F0C987";
         ctx.beginPath();
-        ctx.moveTo(word.x, word.y + 7);
-        ctx.quadraticCurveTo(word.x + 9, word.y + 19, word.x - 4, word.y + 31);
-        ctx.stroke();
+        ctx.arc(word.x, dotY, 2, 0, 7);
+        ctx.fill();
+        const tail = 1 - map(p, 0.2, 0.28);
+        if (tail > 0) {
+          const dirX = word.x < cx ? -1 : 1;
+          ctx.globalAlpha = word.al * 0.35 * tail;
+          ctx.strokeStyle = "#D99A4E";
+          ctx.beginPath();
+          ctx.moveTo(word.x, dotY);
+          ctx.quadraticCurveTo(
+            word.x + 16 * dirX * tail,
+            dotY + 10 * tail,
+            word.x + 30 * dirX * tail,
+            dotY + 4 * tail + 5 * Math.sin(tm + i * 2),
+          );
+          ctx.stroke();
+        }
       }
       try {
         (ctx as any).letterSpacing = "0px";
@@ -320,6 +338,44 @@ export default function HeroGenesis() {
           try {
             (ctx as any).letterSpacing = "0px";
           } catch {}
+        }
+
+        // feeder threads: once the core exists, the enterprise keeps
+        // flowing into it — persists through the resolved hero state
+        const fa = map(p, 0.7, 0.82);
+        if (fa > 0) {
+          const anchors: [number, number][] = [
+            [-20, h * 0.12],
+            [w + 20, h * 0.06],
+            [-20, h * 0.88],
+            [w + 20, h * 0.8],
+            [w * 0.35, -20],
+          ];
+          ctx.lineWidth = 0.9;
+          for (let j = 0; j < anchors.length; j++) {
+            const [ax2, ay2] = anchors[j];
+            const ddx = cx - ax2;
+            const ddy = cy - ay2;
+            const dl = Math.hypot(ddx, ddy) || 1;
+            const ex = cx - (ddx / dl) * R * 1.02;
+            const ey = cy - (ddy / dl) * R * 1.02;
+            const qx2 = (ax2 + ex) / 2 + (j % 2 ? 70 : -70);
+            const qy2 = (ay2 + ey) / 2 + (j % 2 ? -50 : 50);
+            ctx.globalAlpha = fa * 0.28;
+            ctx.strokeStyle = "#D99A4E";
+            ctx.beginPath();
+            ctx.moveTo(ax2, ay2);
+            ctx.quadraticCurveTo(qx2, qy2, ex, ey);
+            ctx.stroke();
+            const q = (tm * 0.16 + j * 0.21) % 1;
+            const [px2, py2] = quadPoint(ax2, ay2, qx2, qy2, ex, ey, q);
+            ctx.globalAlpha = fa * 0.85;
+            ctx.fillStyle = "#F0C987";
+            ctx.beginPath();
+            ctx.arc(px2, py2, 1.7, 0, 7);
+            ctx.fill();
+          }
+          ctx.lineWidth = 1;
         }
       }
       /* eslint-enable @typescript-eslint/no-explicit-any */

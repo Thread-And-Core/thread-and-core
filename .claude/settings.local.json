@@ -20,7 +20,13 @@
       "Bash(curl -s -o /dev/null -w \"/styleguide %{http_code}\\\\n\" http://localhost:3000/styleguide)",
       "Bash(awk 'NR==2{print \"PID: \"$2\" listening on 3000\"}')",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 4 http://localhost:3000/)",
-      "Bash(nohup npm run dev -- -p 3000 > /tmp/thread-core-dev.log 2>&1 & disown; sleep 8; curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)"
+      "Bash(nohup npm run dev -- -p 3000 > /tmp/thread-core-dev.log 2>&1 & disown; sleep 8; curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"localhost:3000 → %{http_code}\\\\n\" --max-time 5 http://localhost:3000/)",
+      "mcp__5db11a3d-3f0b-42c6-aaaf-29d11613eef3__deploy_to_vercel",
+      "Bash(npx --yes vercel whoami)",
+      "Bash(nohup npx --yes vercel login)",
+      "Bash(break)",
+      "Bash(npx vercel *)"
     ]
   }
 }

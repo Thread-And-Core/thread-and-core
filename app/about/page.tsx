@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Portrait from "@/components/Portrait";
 import Reveal from "@/components/Reveal";
 import SectionRule from "@/components/SectionRule";
 
@@ -30,13 +31,19 @@ export default function AboutPage() {
     <main className="overflow-x-clip">
       <section className="bg-ink-950">
         <div className="container-site pt-40 pb-24">
-          <p className="eyebrow mb-6">The Architect</p>
-          <h1 className="max-w-3xl text-[clamp(2.2rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.02em] text-core-white">
-            The architect behind Thread &amp; Core Systems.
-          </h1>
-          <p className="mt-8 max-w-2xl font-editorial text-[clamp(1.25rem,2.2vw,1.7rem)] italic text-thread-300">
-            The architect who scopes your project is the one who builds it.
-          </p>
+          <div className="grid items-end gap-10 md:grid-cols-[1fr_auto]">
+            <div>
+              <p className="eyebrow mb-6">The Architect</p>
+              <h1 className="max-w-3xl text-[clamp(2.2rem,5vw,4rem)] font-bold leading-[1.06] tracking-[-0.02em] text-core-white">
+                The architect behind Thread &amp; Core Systems.
+              </h1>
+              <p className="mt-8 max-w-2xl font-editorial text-[clamp(1.25rem,2.2vw,1.7rem)] italic text-thread-300">
+                The architect who scopes your project is the one who builds
+                it.
+              </p>
+            </div>
+            <Portrait className="hidden md:block" />
+          </div>
         </div>
       </section>
 

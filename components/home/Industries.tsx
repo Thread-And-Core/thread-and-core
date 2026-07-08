@@ -5,7 +5,7 @@ const TILES = [
   {
     name: "Mining & Explosives",
     desc: "Field operations & logistics",
-    proof: "Field operations platform — 4 regions, 7 languages, live.",
+    proof: "Real-time field operations platform for mining and blasting workflows.",
   },
   {
     name: "Healthcare",
@@ -83,9 +83,9 @@ function Woven({ seed }: { seed: number }) {
 
 export default function Industries() {
   return (
-    <section className="bg-ink-950">
+    <section>
       <div className="container-site py-28 md:pl-40">
-        <SectionRule index="04" label="Where We've Delivered" />
+        <SectionRule index="03" label="Where We've Delivered" />
         <h2 className="max-w-2xl text-[clamp(1.9rem,3.6vw,3rem)] font-bold leading-tight tracking-[-0.01em] text-core-white">
           Every engagement is anchored in the business.
         </h2>
@@ -99,7 +99,7 @@ export default function Industries() {
             <Link
               key={tile.name}
               href="/work"
-              className="group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-[3px] border border-hairline bg-ink-800 p-5 transition-colors duration-500 hover:border-thread-500/60"
+              className="group relative flex flex-col justify-between gap-6 overflow-hidden rounded-[3px] border border-hairline bg-ink-800 p-5 transition-colors duration-500 hover:border-thread-500/60 md:aspect-[4/3] md:gap-0"
             >
               <Woven seed={i + 1} />
               <p className="relative font-mono text-[11px] tracking-[0.14em] text-fg-muted transition-colors duration-500 group-hover:text-thread-500">
@@ -112,7 +112,7 @@ export default function Industries() {
                 <p className="mt-1 font-mono text-[10px] tracking-[0.08em] text-fg-muted uppercase">
                   {tile.desc}
                 </p>
-                <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:mt-3 group-hover:max-h-24 group-hover:opacity-100">
+                <div className="mt-3 max-h-24 overflow-hidden opacity-100 transition-all duration-500 md:mt-0 md:max-h-0 md:opacity-0 md:group-hover:mt-3 md:group-hover:max-h-24 md:group-hover:opacity-100">
                   <p className="font-mono text-[10.5px] leading-relaxed tracking-[0.04em] text-fg-secondary">
                     {tile.proof}
                   </p>

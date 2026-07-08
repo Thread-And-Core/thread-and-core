@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CoreSphere from "@/components/CoreSphere";
 import {
+  KnotCore,
   KnotAmpersand,
   CoilCore,
   StitchMark,
@@ -29,7 +30,12 @@ const swatches: [string, string][] = [
 
 const marks = [
   {
-    name: "01 — The Knot Ampersand",
+    name: "00 — The Knot Core · Primary",
+    note: "One continuous thread tied into a knot around the core. The line is the thread, the knot is the connection, the dot is the core — the mark alone says the name.",
+    Mark: KnotCore,
+  },
+  {
+    name: "01 — The Knot Ampersand (superseded)",
     note: "The & drawn as one continuous line tying a knot. The connector is the brand.",
     Mark: KnotAmpersand,
   },

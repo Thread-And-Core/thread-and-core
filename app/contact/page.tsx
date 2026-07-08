@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const details: [string, string, string?][] = [
-  ["Email", "agarawal.prashant@gmail.com", "mailto:agarawal.prashant@gmail.com"],
+  ["Email", "Prashant.Agarwal@threadandcore.com", "mailto:Prashant.Agarwal@threadandcore.com"],
   [
     "LinkedIn",
     "linkedin.com/in/agarawal-prashant",
@@ -59,7 +59,7 @@ export default function ContactPage() {
       </dl>
 
       <a
-        href="mailto:agarawal.prashant@gmail.com?subject=Start%20a%20conversation%20—%20Thread%20%26%20Core"
+        href="mailto:Prashant.Agarwal@threadandcore.com?subject=Start%20a%20conversation%20—%20Thread%20%26%20Core"
         className="btn-primary mt-12 inline-block"
       >
         Start a Conversation

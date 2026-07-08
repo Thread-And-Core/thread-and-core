@@ -35,7 +35,7 @@ export default function Nav() {
           : "border-transparent bg-transparent"
       }`}
     >
-      <div className="container-site flex h-16 items-center justify-between">
+      <div className="container-site flex h-[72px] items-center justify-between">
         <Link href="/" aria-label="Thread & Core Systems — home">
           <Wordmark />
         </Link>

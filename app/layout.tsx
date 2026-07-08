@@ -77,7 +77,7 @@ const jsonLd = {
       alternateName: "Thread & Core",
       url: siteUrl,
       slogan: "Connecting Every Thread to the Core.",
-      email: "agarawal.prashant@gmail.com",
+      email: "Prashant.Agarwal@threadandcore.com",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Pune",

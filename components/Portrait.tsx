@@ -2,12 +2,21 @@
 
 import { useEffect, useState } from "react";
 
+type Props = {
+  className?: string;
+  /** Size and shape classes, e.g. "h-24 w-24 rounded-full". */
+  sizeClassName?: string;
+};
+
 /**
  * Founder portrait — expects /public/prashant.jpg (use the LinkedIn photo
  * for cross-platform authenticity). Probes for the file and renders a
  * monogram placeholder until it exists.
  */
-export default function Portrait({ className = "" }: { className?: string }) {
+export default function Portrait({
+  className = "",
+  sizeClassName = "h-48 w-48 rounded-[3px]",
+}: Props) {
   const [state, setState] = useState<"checking" | "ok" | "missing">(
     "checking",
   );
@@ -34,21 +43,19 @@ export default function Portrait({ className = "" }: { className?: string }) {
       <img
         src="/prashant.jpg"
         alt="Prashant Agarwal — SAP-certified BTP Solution Architect, founder of Thread & Core Systems"
-        className={`h-48 w-48 rounded-[3px] border border-hairline object-cover ${className}`}
+        className={`border border-hairline object-cover ${sizeClassName} ${className}`}
       />
     );
   }
 
   return (
     <div
-      className={`flex h-48 w-48 flex-col items-center justify-center rounded-[3px] border border-hairline bg-ink-800 ${className}`}
+      className={`flex flex-col items-center justify-center border border-hairline bg-ink-800 ${sizeClassName} ${className}`}
     >
       {state === "missing" && (
         <>
-          <p className="font-display text-4xl font-bold text-thread-300">PA</p>
-          <p className="mt-3 px-4 text-center font-mono text-[9px] leading-relaxed tracking-[0.1em] text-fg-muted uppercase">
-            Add photo:
-            <br />
+          <p className="font-display text-2xl font-bold text-thread-300">PA</p>
+          <p className="mt-1 px-2 text-center font-mono text-[8px] leading-relaxed tracking-[0.08em] text-fg-muted uppercase">
             public/prashant.jpg
           </p>
         </>

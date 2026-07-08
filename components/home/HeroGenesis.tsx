@@ -52,30 +52,30 @@ function quadPoint(
 function HeroCopy({ itemClass }: { itemClass: string }) {
   return (
     <>
-      <p className={`eyebrow mb-6 ${itemClass}`} data-i="0">
+      <p className={`eyebrow mb-5 ${itemClass}`} data-i="0">
         Thread &amp; Core Systems Pvt Ltd
       </p>
       <h1
-        className={`text-[clamp(2.3rem,5.4vw,4.6rem)] font-bold leading-[1.04] tracking-[-0.02em] text-core-white ${itemClass}`}
+        className={`text-[clamp(2.3rem,5.4vw,4.4rem)] font-bold leading-[1.04] tracking-[-0.02em] text-core-white ${itemClass}`}
         data-i="1"
       >
-        Enterprise Architecture for the Connected Enterprise.
+        Technology doesn&rsquo;t transform businesses.
       </h1>
       <p
-        className={`mt-5 font-editorial text-[clamp(1.3rem,2.3vw,1.85rem)] italic text-thread-300 ${itemClass}`}
+        className={`mt-4 font-editorial text-[clamp(1.6rem,3vw,2.4rem)] italic text-thread-300 ${itemClass}`}
         data-i="2"
       >
-        Connecting Every Thread to the Core.
+        Connection does.
       </p>
       <p
         className={`mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-fg-secondary ${itemClass}`}
         data-i="3"
       >
-        We turn scattered processes, applications, data, and AI into one
-        connected architecture — built and owned in production by the
-        architect you first speak to.
+        Every enterprise runs on invisible threads: processes, applications,
+        data, people, and intelligence. We help connect those threads to the
+        core, creating systems that scale, adapt, and endure.
       </p>
-      <div className={`mt-9 flex flex-wrap gap-4 ${itemClass}`} data-i="4">
+      <div className={`mt-8 flex flex-wrap gap-4 ${itemClass}`} data-i="4">
         <Link href="/contact" className="btn-primary">
           Start a Conversation
         </Link>
@@ -215,8 +215,8 @@ export default function HeroGenesis() {
           const A = wp[PAIRS[k][0]];
           const B = wp[PAIRS[k][1]];
           if (A.al <= 0 || B.al <= 0) continue;
-          const ay = A.y + 12;
-          const by = B.y + 12;
+          const ay = A.y + 15;
+          const by = B.y + 15;
           const mx = (A.x + B.x) / 2;
           const my = (ay + by) / 2;
           const dx = B.x - A.x;
@@ -245,9 +245,9 @@ export default function HeroGenesis() {
 
       /* eslint-disable @typescript-eslint/no-explicit-any */
       try {
-        (ctx as any).letterSpacing = "2px";
+        (ctx as any).letterSpacing = "3px";
       } catch {}
-      ctx.font = `500 ${desktop ? 12 : 10.5}px ${mono}`;
+      ctx.font = `500 ${desktop ? 15 : 12.5}px ${mono}`;
       ctx.textAlign = "center";
       for (let i = 0; i < wp.length; i++) {
         const word = wp[i];
@@ -255,7 +255,7 @@ export default function HeroGenesis() {
         ctx.globalAlpha = word.al;
         ctx.fillStyle = "#EDE7DC";
         ctx.fillText(WORDS[i][0], word.x, word.y);
-        const dotY = word.y + 12;
+        const dotY = word.y + 15;
         const pulse = 0.55 + 0.35 * Math.sin(tm * 2 + i * 1.3);
         ctx.globalAlpha = word.al * pulse;
         ctx.fillStyle = "#F0C987";
@@ -466,7 +466,7 @@ export default function HeroGenesis() {
 
         <div
           ref={heroRef}
-          className="pointer-events-none absolute inset-0 flex items-end pb-24 md:items-center md:pb-0"
+          className="pointer-events-none absolute inset-0 flex items-end pt-24 pb-14 md:items-center md:pt-20 md:pb-0"
         >
           <div className="container-site">
             <div className="max-w-2xl">

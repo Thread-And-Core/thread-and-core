@@ -26,7 +26,26 @@
       "Bash(npx --yes vercel whoami)",
       "Bash(nohup npx --yes vercel login)",
       "Bash(break)",
-      "Bash(npx vercel *)"
+      "Bash(npx vercel *)",
+      "Bash(node -e ' *)",
+      "Bash(curl -s https://thread-and-core.vercel.app/)",
+      "mcp__5db11a3d-3f0b-42c6-aaaf-29d11613eef3__get_deployment",
+      "Bash(pkill -f \"vercel deploy --prod\")",
+      "Bash(echo \"exit:$?\")",
+      "Bash(curl -s --max-time 10 \"https://www.vercel-status.com/api/v2/status.json\")",
+      "mcp__5db11a3d-3f0b-42c6-aaaf-29d11613eef3__list_teams",
+      "mcp__5db11a3d-3f0b-42c6-aaaf-29d11613eef3__get_project",
+      "Bash(pkill -f \"vercel\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(curl -s http://localhost:3000/framework)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 4 http://localhost:3000/work)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/work)",
+      "Bash(curl -s http://localhost:3000/work)",
+      "Bash(curl -s -o /dev/null -w \"home %{http_code} · \" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"about %{http_code} · \" http://localhost:3000/about)",
+      "Bash(curl -s -o /dev/null -w \"work %{http_code}\\\\n\" http://localhost:3000/work)",
+      "Bash(curl -s http://localhost:3000/about)"
     ]
   }
 }

@@ -45,6 +45,15 @@
     border-radius: 2px;
   }
 
+  /* Demo videos must never crop in fullscreen — letterbox instead */
+  video:fullscreen {
+    object-fit: contain;
+  }
+
+  video:-webkit-full-screen {
+    object-fit: contain;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

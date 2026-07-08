@@ -1,10 +1,15 @@
 import Link from "next/link";
-import { Wordmark } from "@/components/logo/concepts";
+import { KnotCore, Wordmark } from "@/components/logo/concepts";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hairline bg-ink-950">
-      <div className="container-site grid gap-12 py-16 md:grid-cols-3">
+    <footer className="relative overflow-hidden border-t border-hairline bg-ink-950">
+      <KnotCore
+        size={240}
+        strokeWidth={1.1}
+        className="pointer-events-none absolute top-1/2 -right-8 hidden -translate-y-1/2 opacity-[0.08] md:block"
+      />
+      <div className="container-site relative grid gap-12 py-16 md:grid-cols-3">
         <div>
           <Wordmark />
           <p className="mt-4 font-editorial text-[1.05rem] italic text-thread-300">
@@ -13,10 +18,10 @@ export default function Footer() {
         </div>
         <div className="font-mono text-[12.5px] leading-7 tracking-[0.04em] text-fg-secondary">
           <a
-            href="mailto:agarawal.prashant@gmail.com"
+            href="mailto:Prashant.Agarwal@threadandcore.com"
             className="block transition-colors hover:text-core-white"
           >
-            agarawal.prashant@gmail.com
+            Prashant.Agarwal@threadandcore.com
           </a>
           <a
             href="https://linkedin.com/in/agarawal-prashant"

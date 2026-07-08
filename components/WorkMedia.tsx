@@ -42,9 +42,13 @@ export default function WorkMedia({ type, src, title }: Props) {
           src={src}
           controls
           playsInline
+          muted
           preload="metadata"
+          ref={(el) => {
+            if (el) el.muted = true;
+          }}
           onError={() => setState("missing")}
-          className="aspect-video w-full rounded-[3px] border border-hairline bg-ink-950 object-cover"
+          className="aspect-video w-full rounded-[3px] border border-hairline bg-ink-950 object-contain"
           aria-label={`Demo video — ${title}`}
         />
       );

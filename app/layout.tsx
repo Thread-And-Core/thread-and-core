@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import { Fraunces, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
@@ -123,6 +124,18 @@ export default function RootLayout({
         <Nav />
         <div id="main-content">{children}</div>
         <Footer />
+          <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-3K9WXBCDR5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3K9WXBCDR5');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

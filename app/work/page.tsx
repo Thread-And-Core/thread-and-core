@@ -26,17 +26,9 @@ export default function WorkPage() {
       sector: "Mining & Explosives — Global industrial field operations",
       title: "Field Operations Intelligence Platform",
       //body: "A three-application operations platform for a global explosives and blasting services company — APAC, EMEA, NA and Europe, in 7 languages. A real-time blast-scheduling board manages trucks, crews, shotfirers and surveyors, and auto-creates Planned Orders in S/4HANA from a 4-week rolling forecast. A tablet app replaced paper delivery dockets entirely — actuals against plan, on-site additions, and the customer's digital signature generating a legally complete docket PDF. A customer portal gives mining sites live delivery visibility and digital countersigning, removing the 3–5 day billing delay per docket. Planner to operator to customer, every status change flowing in real time.",
-      body: `Explosives delivery to a mine site involves three moving parts that rarely talk to each other — the planner scheduling the trucks, the operator driving them, and the mining customer waiting for materials.
-
-The delivery involved three connected applications to digitise the entire chain for a global explosives company operating across 4 regions and 7 languages.
-
-Planners got a real-time blast scheduling board — trucks, crews, shotfirers, multi-day and recurring bookings — with a 4-week rolling forecast that auto-creates procurement orders in SAP S/4HANA. What used to be a 16-step manual goods receipt process became a single tap.
-
-Operators used an offline-supported tablet app that replaced paper dockets entirely. Schedule on screen, actuals captured on site, customer signs on the tablet, docket PDF generated and billing triggered — all before the truck leaves the gate.
-
-Mining customers got a portal to track every incoming delivery, review what was delivered, and countersign digitally — cutting days of billing delay to minutes.
-
-Every status change flows across all three applications in real time. Built on SAP BTP, React, Node.js, HANA Cloud and SAP S/4HANA.`,
+      body: `Mine-site explosives delivery depends on three disconnected roles: planners, operators, and customers. The delivery involved three connected applications to digitise the entire chain for a global explosives company.
+It connected planner scheduling, operator execution, and customer confirmation in real time. Planners managed blast schedules and rolling forecasts that created SAP S/4HANA procurement orders. Operators replaced paper dockets with an offline tablet app for actuals, signatures, PDFs, and billing triggers. Customers tracked and countersigned deliveries through a portal.
+Impact: 16-step goods receipt became one tap, and billing delays reduced from days to minutes.`,
       tags: "SAP BTP · S/4HANA · CAPM · React · Node.js · HANA Cloud · SAP MDK",
       media: { type: "image", src: "/work/foi.png" },
       stats: [

@@ -10,8 +10,8 @@ const details: [string, string, string?][] = [
   ["Email", "Prashant.Agarwal@threadandcore.com", "mailto:Prashant.Agarwal@threadandcore.com"],
   [
     "LinkedIn",
-    "linkedin.com/in/agarawal-prashant",
-    "https://linkedin.com/in/agarawal-prashant",
+    "linkedin.com/company/threadandcore",
+    "https://linkedin.com/company/threadandcore",
   ],
   ["Location", "Pune, India"],
   ["Availability", "Remote and onsite engagements, globally"],

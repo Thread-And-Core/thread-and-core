@@ -99,7 +99,8 @@
       "Bash(cp /tmp/satoshi-extract/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Regular.ttf /tmp/satoshi-extract/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Medium.ttf /tmp/satoshi-extract/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Bold.ttf /tmp/satoshi-extract/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Black.ttf .)",
       "Bash(rm satoshi.zip)",
       "Bash(curl -sL --max-time 30 -o Fraunces-Italic-var.ttf \"https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces-Italic%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf\")",
-      "Bash(python3 brand/logo/build_logo_kit.py)"
+      "Bash(python3 brand/logo/build_logo_kit.py)",
+      "Bash(TC_FONT_DIR=/dev/null python3 -c ' *)"
     ]
   }
 }

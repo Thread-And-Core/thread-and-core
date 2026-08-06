@@ -12,20 +12,17 @@ commands) and Pillow + fontTools installed.
 import math, os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-FONT_DIR = os.environ.get(
-    "TC_FONT_DIR",
-    "/private/tmp/claude-501/-Users-kunjamaggarwal-Documents-Thread-And-Core-website-Fable5/d76aaee8-2a20-4948-9615-53c9d15d8fdd/scratchpad/fonts",
-)
 PROJECT = "/Users/kunjamaggarwal/Documents/Thread-And-Core-website-Fable5"
+FONT_DIR = os.environ.get("TC_FONT_DIR", f"{PROJECT}/brand/fonts")
 OUT = f"{PROJECT}/brand/social"
 os.makedirs(OUT, exist_ok=True)
 
-SATOSHI_BOLD = f"{FONT_DIR}/satoshi/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Bold.ttf"
-SATOSHI_BLACK = f"{FONT_DIR}/satoshi/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Black.ttf"
-SATOSHI_MED = f"{FONT_DIR}/satoshi/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Medium.ttf"
-FRAUNCES = f"{FONT_DIR}/gf/Fraunces-Italic-static.ttf"
-JBM = f"{FONT_DIR}/gf/JBM-Regular-static.ttf"
-JBM_MED = f"{FONT_DIR}/gf/JBM-Medium-static.ttf"
+SATOSHI_BOLD = f"{FONT_DIR}/Satoshi-Bold.ttf"
+SATOSHI_BLACK = f"{FONT_DIR}/Satoshi-Black.ttf"
+SATOSHI_MED = f"{FONT_DIR}/Satoshi-Medium.ttf"
+FRAUNCES = f"{FONT_DIR}/Fraunces-Italic.ttf"
+JBM = f"{FONT_DIR}/JetBrainsMono-Regular.ttf"
+JBM_MED = f"{FONT_DIR}/JetBrainsMono-Medium.ttf"
 
 INK_950 = (8, 10, 15)
 INK_900 = (12, 15, 22)
@@ -58,7 +55,8 @@ for i in range(481):
 def draw_knot(base, cx, cy, scale, width_frac=0.11, color=THREAD_500, core=THREAD_300, alpha=255):
     layer = Image.new("RGBA", base.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(layer)
-    pts = [(cx + x * scale, cy - y * scale) for (x, y) in _TREF]
+    # canonical website orientation (single lobe UP): screen_y = cy + y*scale
+    pts = [(cx + x * scale, cy + y * scale) for (x, y) in _TREF]
     w = max(2, int(scale * width_frac))
     d.line(pts, fill=color + (alpha,), width=w, joint="curve")
     r = w / 2

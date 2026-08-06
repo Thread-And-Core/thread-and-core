@@ -13,7 +13,7 @@ const details: [string, string, string?][] = [
     "linkedin.com/company/threadandcore",
     "https://linkedin.com/company/threadandcore",
   ],
-  ["Location", "Pune, India"],
+  ["Location", "R7,F806,LIFE REPUBLIC BY KOLTE PATIL, MARUNJI, Pune, Maharashtra, India, 411057"],
   ["Availability", "Remote and onsite engagements, globally"],
 ];
 

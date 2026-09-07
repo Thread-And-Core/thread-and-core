@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Field Operations Intelligence — Thread & Core Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#0A0E14; --dark2:#12181F; --card:#161C24; --line:#232B35;
+  --o:#E8590C; --o2:#FF7A3D; --os:#FFF1E8;
+  --gold:#D99A4E;
+  --ink:#1A1D21; --sl:#5B6470; --mu:#8A929C;
+  --bg:#F7F8FA; --white:#fff;
+  --green:#2F9E44; --red:#E03131;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',-apple-system,sans-serif;
+  background:var(--bg); color:var(--ink);
+  -webkit-font-smoothing:antialiased; line-height:1.6;
+}
+.wrap{max-width:1000px;margin:0 auto;background:var(--white);box-shadow:0 4px 40px rgba(0,0,0,.08)}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;background:var(--dark);color:#fff;
+  padding:54px 56px 48px;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;opacity:1;
+  background-image:linear-gradient(rgba(232,89,12,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,89,12,.04) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,89,12,.13) 0%,transparent 62%);
+  top:-220px;right:-160px}
+.hero-inner{position:relative;z-index:2}
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:38px}
+.brand-mark{width:38px;height:38px;flex-shrink:0}
+.brand-name{font-size:15px;font-weight:700;color:#fff;letter-spacing:.2px}
+.brand-sub{font-size:11px;color:var(--mu);letter-spacing:1.5px;text-transform:uppercase}
+
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;color:var(--o2);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:44px;font-weight:800;letter-spacing:-1.4px;line-height:1.08;margin-bottom:20px;max-width:760px}
+.hero h1 .hl{color:var(--o)}
+.hero-lede{font-size:17px;color:#C7CDD4;max-width:660px;line-height:1.6;font-weight:400}
+.hero-lede strong{color:#fff;font-weight:600}
+
+.cred-strip{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;
+}
+.cred-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(232,89,12,.1);border:1px solid rgba(232,89,12,.3);
+  color:#FFD4B8;font-size:12.5px;font-weight:600;
+  padding:7px 14px;border-radius:100px;
+}
+.cred-pill b{color:var(--o2);font-weight:800}
+
+/* ============ PROOF BANNER ============ */
+.proof{
+  background:var(--o);color:#fff;padding:16px 56px;
+  display:flex;align-items:center;gap:14px;font-size:14.5px;font-weight:600;
+}
+.proof .dot{width:8px;height:8px;border-radius:50%;background:#fff;
+  box-shadow:0 0 0 4px rgba(255,255,255,.28);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ============ SECTIONS ============ */
+.section{padding:48px 56px;border-bottom:1px solid #ECEEF2}
+.sec-label{font-size:11px;font-weight:700;color:var(--o);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:#E6E9ED;max-width:60px}
+.sec-title{font-size:27px;font-weight:800;letter-spacing:-.7px;margin-bottom:8px;line-height:1.15}
+.sec-intro{font-size:15px;color:var(--sl);max-width:680px;margin-bottom:6px}
+
+/* ============ THE PROBLEM ============ */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.prob-card{background:#FFF6F6;border:1px solid #FADBD9;border-radius:12px;padding:18px 20px;
+  display:flex;gap:14px;align-items:flex-start}
+.prob-ic{width:34px;height:34px;border-radius:9px;background:#FEE2E0;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.prob-card h4{font-size:14.5px;font-weight:700;color:#B02A26;margin-bottom:3px}
+.prob-card p{font-size:12.5px;color:#7A4340;line-height:1.55}
+
+.turn{margin-top:30px;background:var(--dark);border-radius:14px;padding:26px 30px;color:#fff;
+  display:flex;align-items:center;gap:20px}
+.turn-badge{font-size:34px;flex-shrink:0}
+.turn h3{font-size:19px;font-weight:700;margin-bottom:5px;letter-spacing:-.3px}
+.turn h3 .hl{color:var(--o2)}
+.turn p{font-size:14px;color:#B8BFC7;line-height:1.55}
+
+/* ============ VIDEOS ============ */
+.section-videos{background:var(--dark);color:#fff;border-bottom:none}
+.section-videos .sec-title{color:#fff}
+.section-videos .sec-intro{color:#AEB6BF}
+.video-block{margin-top:30px}
+.video-block + .video-block{margin-top:36px}
+.video-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.video-tag{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  background:var(--o);color:#fff;padding:4px 11px;border-radius:6px;flex-shrink:0}
+.video-tag.secondary{background:#2A3540;color:#C7CDD4}
+.video-title{font-size:18px;font-weight:700;color:#fff}
+.video-desc{font-size:13.5px;color:#98A0AA;margin-bottom:16px;max-width:720px}
+.video-frame{
+  position:relative;width:100%;aspect-ratio:16/9;background:#000;
+  border-radius:14px;overflow:hidden;border:1px solid #2A3540;
+}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-fallback{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px;
+  background:linear-gradient(135deg,#12181F,#1C2530);color:#fff;text-decoration:none}
+.play-btn{width:64px;height:64px;border-radius:50%;background:var(--o);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(232,89,12,.5)}
+.play-btn svg{margin-left:4px}
+.video-fallback span{font-size:13px;color:#98A0AA;font-weight:600}
+
+/* ============ FEATURES ============ */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.feat-card{background:var(--white);border:1px solid #E6E9ED;border-radius:12px;padding:20px;
+  transition:all .2s;position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--o),var(--o2));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.feat-card:hover{border-color:#F5C9AD;box-shadow:0 8px 24px rgba(232,89,12,.1)}
+.feat-card:hover::before{transform:scaleX(1)}
+.feat-num{font-size:12px;font-weight:800;color:var(--o);margin-bottom:10px}
+.feat-ic{width:42px;height:42px;border-radius:11px;background:var(--os);
+  display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.feat-card h4{font-size:15px;font-weight:700;margin-bottom:6px;letter-spacing:-.2px;line-height:1.25}
+.feat-card p{font-size:12.5px;color:var(--sl);line-height:1.6}
+
+/* ============ LIFECYCLE ============ */
+.section-flow{background:#FAFBFC}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:30px;flex-wrap:nowrap}
+.flow-stage{flex:1;text-align:center;position:relative;padding:0 6px}
+.flow-dot{width:44px;height:44px;border-radius:12px;margin:0 auto 12px;
+  background:var(--white);border:2px solid var(--o);
+  display:flex;align-items:center;justify-content:center;font-size:20px;position:relative;z-index:2}
+.flow-stage:not(:last-child)::after{content:'';position:absolute;top:22px;left:50%;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--o),#F5C9AD);z-index:1}
+.flow-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.flow-sub{font-size:10.5px;color:var(--mu);line-height:1.4}
+
+/* ============ DIFFERENTIATORS ============ */
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.diff-card{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;
+  background:var(--white);border:1px solid #E6E9ED;border-radius:12px}
+.diff-check{width:26px;height:26px;border-radius:7px;background:var(--os);color:var(--o);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.diff-card h4{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.diff-card p{font-size:12.5px;color:var(--sl);line-height:1.55}
+
+/* ============ STACK ============ */
+.stack-band{background:var(--dark);color:#fff;padding:40px 56px;text-align:center}
+.stack-band .sec-label{justify-content:center}
+.stack-band .sec-label::after{display:none}
+.stack-title{font-size:22px;font-weight:700;margin-bottom:8px;letter-spacing:-.4px}
+.stack-sub{font-size:14px;color:#AEB6BF;max-width:600px;margin:0 auto 24px}
+.stack-pills{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.stack-pill{font-size:12.5px;font-weight:700;padding:7px 15px;border-radius:100px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#D4DAE0}
+.stack-pill.hot{background:rgba(232,89,12,.16);border-color:rgba(232,89,12,.4);color:var(--o2)}
+
+/* ============ CTA ============ */
+.cta{background:linear-gradient(135deg,var(--o),#D14806);color:#fff;padding:48px 56px;text-align:center}
+.cta h2{font-size:30px;font-weight:800;letter-spacing:-.8px;margin-bottom:12px;line-height:1.15}
+.cta p{font-size:16px;color:rgba(255,255,255,.92);max-width:600px;margin:0 auto 28px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--o);
+  font-size:15px;font-weight:700;padding:14px 28px;border-radius:10px;text-decoration:none;
+  transition:transform .15s;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.cta-btn:hover{transform:translateY(-2px)}
+.cta-btn.ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:none}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--dark2);color:#fff;padding:30px 56px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{display:flex;align-items:center;gap:11px}
+.footer-brand .brand-mark{width:32px;height:32px}
+.footer-brand-name{font-size:14px;font-weight:700}
+.footer-brand-tag{font-size:11px;color:var(--mu)}
+.footer-contact{font-size:13px;color:#AEB6BF;text-align:right;line-height:1.7}
+.footer-contact a{color:#fff;text-decoration:none;font-weight:600}
+.footer-confidential{background:var(--dark);color:#5B6470;font-size:10.5px;
+  text-align:center;padding:10px;font-style:italic}
+
+
+/* ============ PERSONAS ============ */
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.persona-card{border:1px solid #E6E9ED;border-radius:14px;overflow:hidden;background:var(--white)}
+.persona-top{padding:20px 20px 16px;color:#fff;position:relative}
+.persona-top.p1{background:linear-gradient(135deg,#1971C2,#155a9c)}
+.persona-top.p2{background:linear-gradient(135deg,#E8590C,#c94a08)}
+.persona-top.p3{background:linear-gradient(135deg,#2F9E44,#268139)}
+.persona-app{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.85;margin-bottom:8px}
+.persona-ic{font-size:30px;margin-bottom:8px}
+.persona-who{font-size:17px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px}
+.persona-role{font-size:12px;opacity:.9;font-weight:500}
+.persona-body{padding:16px 20px 20px}
+.persona-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.persona-body li{font-size:12.5px;color:var(--sl);display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.persona-body li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--o);margin-top:6px;flex-shrink:0}
+.persona-loc{font-size:11px;color:var(--mu);margin-top:14px;padding-top:12px;border-top:1px solid #EEF0F3;font-weight:600}
+.persona-connector{text-align:center;margin-top:20px;font-size:13px;color:var(--sl);font-weight:600}
+.persona-connector .hl{color:var(--o);font-weight:800}
+
+/* ============ FOUNDER ============ */
+.section-founder{background:var(--dark);color:#fff;border-bottom:none}
+.founder-wrap{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;margin-top:26px}
+.founder-badge{width:180px;flex-shrink:0;text-align:center}
+.founder-avatar{width:180px;height:180px;border-radius:22px;margin:0 auto 14px;
+  overflow:hidden;box-shadow:0 8px 30px rgba(232,89,12,.4);cursor:pointer;transition:transform .2s}
+.founder-avatar:hover{transform:scale(1.04)}
+.founder-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.founder-name{font-size:15px;font-weight:700;color:#fff}
+.founder-title{font-size:11px;color:var(--mu);line-height:1.4;margin-top:2px}
+.section-founder .sec-title{color:#fff}
+.founder-text p{font-size:14.5px;color:#C7CDD4;line-height:1.7;margin-bottom:14px}
+.founder-text p strong{color:#fff;font-weight:600}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.founder-tag{font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:100px;
+  background:rgba(232,89,12,.14);border:1px solid rgba(232,89,12,.3);color:#FFD4B8}
+
+/* ============ LIGHTBOX ============ */
+.lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);
+  align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px)}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.6);object-fit:contain}
+.lightbox-close{position:absolute;top:24px;right:32px;color:#fff;font-size:32px;font-weight:700;
+  cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.1);border-radius:50%;border:none;transition:background .2s}
+.lightbox-close:hover{background:rgba(255,255,255,.25)}
+@media (max-width:780px){
+  .persona-grid{grid-template-columns:1fr}
+  .founder-wrap{grid-template-columns:1fr}
+  .founder-badge{margin:0 auto}
+}
+
+@media (max-width:780px){
+  .hero,.section,.stack-band,.cta,.footer,.proof{padding-left:28px;padding-right:28px}
+  .hero h1{font-size:32px}
+  .problem-grid,.feat-grid,.diff-grid{grid-template-columns:1fr}
+  .flow{flex-wrap:wrap;gap:16px}
+  .flow-stage{flex:1 1 40%}
+  .flow-stage::after{display:none}
+  .footer{flex-direction:column;align-items:flex-start}
+  .footer-contact{text-align:left}
+}
+@media print{body{background:#fff}.wrap{box-shadow:none}.video-frame{display:none}}
+
+/* logo mark */
+.tc-mark polyline{stroke:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="brand-row">
+        <svg class="tc-mark brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="50,43.4 56.5,43.9 62.7,45.3 68.5,47.5 73.5,50.6 77.7,54.2 81,58.2 83,62.5 84,66.8 83.7,70.8 82.3,74.5 79.8,77.5 76.4,79.8 72.3,81.1 67.5,81.4 62.4,80.7 57.2,78.9 52.1,76 47.2,72.1 43,67.4 39.2,62 36.4,56.2 34.5,50.1 33.6,44 33.5,41 34.1,35.3 35.5,30.1 38,25.8 41,22.3 44.3,19.9 48.1,18.7 52,18.7 55.7,19.9 59.2,22.3 62.2,25.8 64.5,30.1 65.9,35.3 66.5,41 66.4,44 65.5,50.1 63.6,56.2 60.8,62 57.1,67.4 52.8,72.1 47.9,76 42.8,78.9 37.6,80.7 32.5,81.4 27.7,81.1 23.6,79.8 20.2,77.5 17.7,74.5 16.3,70.8 16,66.8 17,62.5 19,58.2 22.3,54.2 26.5,50.6 31.5,47.5 37.3,45.3 43.5,43.9 50,43.4" fill="none" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="50" cy="55.8" r="2.2" fill="#F0C987"/>
+        </svg>
+        <div>
+          <div class="brand-name">Thread &amp; Core Systems</div>
+          <div class="brand-sub">SAP BTP · Enterprise Field Operations</div>
+        </div>
+      </div>
+
+      <div class="eyebrow">Field Operations Intelligence</div>
+      <h1>The explosives delivery runs on paper.<br><span class="hl">We put the whole thing on one screen.</span></h1>
+      <p class="hero-lede">From scheduling a blast to invoicing the customer on the field — <strong>Field Operations Intelligence</strong> digitises the complete delivery lifecycle for explosives and mining companies. Built on SAP, offline-capable, and already live in production.</p>
+
+      <div class="cred-strip">
+        <span class="cred-pill"><b>4</b> global regions live</span>
+        <span class="cred-pill"><b>7</b> languages</span>
+        <span class="cred-pill"><b>16→1</b> step goods receipt</span>
+        <span class="cred-pill"><b>0</b> paper dockets</span>
+        <span class="cred-pill">SAP BTP · S/4HANA native</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PROOF BANNER ============ -->
+  <div class="proof">
+    <span class="dot"></span>
+    Architected &amp; delivered for a global explosives company — live across Australia, North America, EMEA &amp; Asia.
+  </div>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <div class="section">
+    <div class="sec-label">The Problem</div>
+    <div class="sec-title">A blast contract runs for weeks. The paperwork runs forever.</div>
+    <div class="sec-intro">A single mining contract means a truck to site every day for 30, 40, sometimes 60 days — each with its own delivery, its own docket, its own invoice. Today that lives across three disconnected teams, and none of them see the same picture.</div>
+
+    <div class="problem-grid">
+      <div class="prob-card">
+        <div class="prob-ic">📋</div>
+        <div><h4>Scheduling on spreadsheets &amp; WhatsApp</h4><p>Vehicles, crews and blast jobs tracked in Excel and chat — conflicts surface only when the shift starts.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-ic">🐢</div>
+        <div><h4>16 manual steps for one goods receipt</h4><p>Every delivery takes a long, manual ERP process — posted hours later, so system stock never matches reality.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-ic">📄</div>
+        <div><h4>Paper dockets, lost in the field</h4><p>Handwritten dockets travel back from remote sites days later — damaged, illegible, or missing — holding up billing.</p></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-ic">🙈</div>
+        <div><h4>Customers flying blind</h4><p>Mining customers can't see what's scheduled, what arrived, or what they've used — every query is a phone call.</p></div>
+      </div>
+    </div>
+
+    <div class="turn">
+      <div class="turn-badge">⚡</div>
+      <div>
+        <h3>What if all of it lived on <span class="hl">one connected platform?</span></h3>
+        <p>That's Field Operations Intelligence — one system carrying a delivery from the planner's board, to the operator's tablet in the pit, to the customer's sign-off, to the invoice in your ERP. In real time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PERSONAS / 3 APPS ============ -->
+  <div class="section">
+    <div class="sec-label">One Platform, Three Apps</div>
+    <div class="sec-title">Built for the three people who run every delivery.</div>
+    <div class="sec-intro">FOI isn't one app — it's three, each designed around a different person in the operation, all sharing the same live data and the same SAP backbone. The planner, the operator, and the customer each get their own purpose-built view.</div>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-top p1">
+          <div class="persona-app">App 1 · Web Dashboard</div>
+          <div class="persona-ic">🗓️</div>
+          <div class="persona-who">The Planner / CSR</div>
+          <div class="persona-role">Sitting in the plant</div>
+        </div>
+        <div class="persona-body">
+          <ul>
+            <li>Schedules blasts on the week-view board</li>
+            <li>Assigns vehicles, crews and materials</li>
+            <li>Runs the forecast &amp; goods receipt</li>
+            <li>Sees planned vs actual on every delivery</li>
+          </ul>
+          <div class="persona-loc">📍 Plant office · desktop</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-top p2">
+          <div class="persona-app">App 2 · Mobile / Tablet</div>
+          <div class="persona-ic">📲</div>
+          <div class="persona-who">The Operator</div>
+          <div class="persona-role">In the vehicle, at the site</div>
+        </div>
+        <div class="persona-body">
+          <ul>
+            <li>Gets the day's jobs on a tablet</li>
+            <li>Captures actual quantities at the hole</li>
+            <li>Works fully offline in remote pits</li>
+            <li>Syncs the docket when signal returns</li>
+          </ul>
+          <div class="persona-loc">📍 Blast site · offline-capable tablet</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-top p3">
+          <div class="persona-app">App 3 · Customer Portal</div>
+          <div class="persona-ic">🏢</div>
+          <div class="persona-who">The Customer</div>
+          <div class="persona-role">Admin / site manager</div>
+        </div>
+        <div class="persona-body">
+          <ul>
+            <li>Sees scheduled, in-progress &amp; delivered loads</li>
+            <li>Signs delivery dockets digitally</li>
+            <li>Tracks usage across every site</li>
+            <li>Views invoices &amp; contract utilisation</li>
+          </ul>
+          <div class="persona-loc">📍 Customer office · web browser</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-connector">All three apps are <span class="hl">SAP-integrated</span> and share <span class="hl">one live source of truth</span> — the same blast, the same numbers, in real time.</div>
+  </div>
+
+  <!-- ============ VIDEOS ============ -->
+  <div class="section section-videos">
+    <div class="sec-label">See It Work</div>
+    <div class="sec-title">Two short demos.</div>
+    <div class="sec-intro">Start with the full platform story — then go deeper on the SAP goods-receipt automation if you want the technical detail.</div>
+
+    <!-- VIDEO 2 — primary -->
+    <div class="video-block">
+      <div class="video-head">
+        <span class="video-tag">Watch First · ~3.5 min</span>
+        <span class="video-title">From Blast Plan to Invoice — the full platform</span>
+      </div>
+      <div class="video-desc">Follow one blast delivery across all three apps: the planner schedules it, the operator delivers and captures actuals offline in the pit, the customer signs in their portal, and the invoice flows into SAP.</div>
+      <div class="video-frame">
+        <video controls preload="metadata" poster="thumbnail-platform.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000">
+          <source src="From Blast Plan to Invoice - the full platform.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- VIDEO 1 — secondary -->
+    <div class="video-block">
+      <div class="video-head">
+        <span class="video-tag secondary">Go Deeper · ~3 min</span>
+        <span class="video-title">Goods Receipt in One Click — the SAP automation</span>
+      </div>
+      <div class="video-desc">A close look at how a 16-step manual goods-receipt process in SAP becomes a single click — including how the system handles quantity variances and keeps physical stock and ERP stock in sync.</div>
+      <div class="video-frame">
+        <video controls preload="metadata" poster="thumbnail-goods-receipt.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000">
+          <source src="Goods Receipt in One Click - the SAP automation-compressed.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ THE LIFECYCLE ============ -->
+  <div class="section section-flow">
+    <div class="sec-label">One Delivery, End to End</div>
+    <div class="sec-title">Every delivery moves through five stages — automatically.</div>
+    <div class="sec-intro">No re-keying, no paper hand-offs. Each stage updates the next in real time, across all three apps and your ERP.</div>
+    <div class="flow">
+      <div class="flow-stage"><div class="flow-dot">📅</div><div class="flow-name">Planned</div><div class="flow-sub">Scheduled on the board</div></div>
+      <div class="flow-stage"><div class="flow-dot">🚚</div><div class="flow-name">In Progress</div><div class="flow-sub">Truck en route to site</div></div>
+      <div class="flow-stage"><div class="flow-dot">📦</div><div class="flow-name">Delivered</div><div class="flow-sub">Actuals captured in the pit</div></div>
+      <div class="flow-stage"><div class="flow-dot">✍️</div><div class="flow-name">Signed</div><div class="flow-sub">Customer signs in portal</div></div>
+      <div class="flow-stage"><div class="flow-dot">🧾</div><div class="flow-name">Submitted</div><div class="flow-sub">Invoice posted to ERP</div></div>
+    </div>
+  </div>
+
+  <!-- ============ FEATURES ============ -->
+  <div class="section">
+    <div class="sec-label">What's Inside</div>
+    <div class="sec-title">Three connected apps. One source of truth.</div>
+    <div class="sec-intro">Each app serves a different person in the operation — but they all share the same live data, the same blast, the same numbers.</div>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-num">01</div>
+        <div class="feat-ic">📅</div>
+        <h4>Blast Scheduling Board</h4>
+        <p>Week-view board for every vehicle, crew and blast. Single-day, multi-day and recurring bookings across long contracts — with live conflict detection before the shift starts.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">02</div>
+        <div class="feat-ic">🔍</div>
+        <h4>1000+ SKU Product Catalogue</h4>
+        <p>Search a huge explosives catalogue — bulk and initiating systems — where products share names but differ by density, formulation and BOM. Pin the exact material, every time.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">03</div>
+        <div class="feat-ic">📲</div>
+        <h4>Offline Mobile Docket</h4>
+        <p>The operator's tablet works fully offline deep in the pit. Captures actual delivered quantities against plan, records variances, and syncs the moment signal returns.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">04</div>
+        <div class="feat-ic">⚡</div>
+        <h4>One-Click Goods Receipt</h4>
+        <p>The 16-step ERP goods-receipt process becomes a single click — posted live to SAP, with automatic handling of quantity variances and holds.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">05</div>
+        <div class="feat-ic">📊</div>
+        <h4>Live Stock — Depot to Blast Hole</h4>
+        <p>Real inventory position per plant, per day: opening balance, receipts, field consumption, closing balance. Physical and system stock finally agree.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">06</div>
+        <div class="feat-ic">🏢</div>
+        <h4>Customer Portal &amp; Sign-off</h4>
+        <p>Mining customers see scheduled, in-progress and delivered loads across every site, sign dockets digitally, and track invoices — their own single source of truth.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">07</div>
+        <div class="feat-ic">🔮</div>
+        <h4>AI Rolling Forecast</h4>
+        <p>Bookings roll up into a rolling demand forecast with stock-risk alerts and confidence scoring — creating planned orders directly in SAP, no phone calls.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">08</div>
+        <div class="feat-ic">🚛</div>
+        <h4>Fleet &amp; Crew Utilisation</h4>
+        <p>See utilisation across the BMD trucks, shotfiring vehicles, survey vehicles and crews at a glance — spot gaps and over-bookings before they cost you.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-num">09</div>
+        <div class="feat-ic">⚖️</div>
+        <h4>Planned vs Actual, Reconciled</h4>
+        <p>Every docket captures what was ordered against what was delivered. The planner sees the variance instantly — and invoices go out on real, delivered quantities.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============ FOUNDER ============ -->
+  <div class="section section-founder">
+    <div class="sec-label">Built From the Field, Not a Brochure</div>
+    <div class="sec-title">The founder stood in the pit.</div>
+    <div class="founder-wrap">
+      <div class="founder-badge">
+        <div class="founder-avatar" onclick="document.getElementById('lightbox').classList.add('active')"><img src="founder-photo.jpg" alt="Prashant Agarwal"></div>
+        <div class="founder-name">Prashant Agarwal</div>
+        <div class="founder-title">Founder &amp; Principal Architect<br>Thread &amp; Core Systems</div>
+      </div>
+      <div class="founder-text">
+        <p>Field Operations Intelligence was architected and delivered for an <strong>Australian mining and explosives manufacturing company</strong>, live across four global regions. But it didn't start on a whiteboard — it started on site.</p>
+        <p>Prashant spent time <strong>onsite in Australia</strong>, witnessing real mining and blasting operations first-hand and working directly with the field personas the platform serves — planners, operators, shotfirers, surveyors and customer teams. That ground-level experience shaped every screen.</p>
+        <p>The result is a platform built by someone who understands the <strong>BMD trucks, shotfiring and surveying vehicles, the crews, and the real mining SKUs</strong> — bulk explosives, initiating systems and packaged emulsions — not just the software. Fourteen-plus years of enterprise SAP experience, applied to a problem seen with his own eyes.</p>
+        <div class="founder-tags">
+          <span class="founder-tag">Onsite field experience · Australia</span>
+          <span class="founder-tag">14+ years enterprise SAP</span>
+          <span class="founder-tag">SAP BTP Solution Architect</span>
+          <span class="founder-tag">Architect + builder, one person</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ STACK ============ -->
+  <div class="stack-band">
+    <div class="sec-label">Built On</div>
+    <div class="stack-title">Enterprise-grade, from day one.</div>
+    <div class="stack-sub">A modern SAP BTP architecture — secure, scalable, multi-region, and designed to sit alongside the systems you already run.</div>
+    <div class="stack-pills">
+      <span class="stack-pill hot">SAP BTP</span>
+      <span class="stack-pill hot">S/4HANA</span>
+      <span class="stack-pill hot">SAP CAPM</span>
+      <span class="stack-pill">HANA Cloud</span>
+      <span class="stack-pill">SAP AI Core</span>
+      <span class="stack-pill">SAP Mobile Services / MDK</span>
+      <span class="stack-pill">React</span>
+      <span class="stack-pill">OData V4</span>
+      <span class="stack-pill">Principal Propagation</span>
+      <span class="stack-pill">Offline Sync</span>
+    </div>
+  </div>
+
+  <!-- ============ CTA ============ -->
+  <div class="cta">
+    <h2>See what this looks like on your operation.</h2>
+    <p>We start with a conversation — understanding your field workflows, materials and customers — then show a working platform mapped to how you actually operate.</p>
+    <div class="cta-btns">
+      <a class="cta-btn" href="mailto:contact@threadandcore.com?subject=FOI%20Demo%20Conversation">Book a 30-min walkthrough →</a>
+      <a class="cta-btn ghost" href="https://threadandcore.com" target="_blank">Visit threadandcore.com</a>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="footer">
+    <div class="footer-brand">
+      <svg class="tc-mark brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="50,43.4 56.5,43.9 62.7,45.3 68.5,47.5 73.5,50.6 77.7,54.2 81,58.2 83,62.5 84,66.8 83.7,70.8 82.3,74.5 79.8,77.5 76.4,79.8 72.3,81.1 67.5,81.4 62.4,80.7 57.2,78.9 52.1,76 47.2,72.1 43,67.4 39.2,62 36.4,56.2 34.5,50.1 33.6,44 33.5,41 34.1,35.3 35.5,30.1 38,25.8 41,22.3 44.3,19.9 48.1,18.7 52,18.7 55.7,19.9 59.2,22.3 62.2,25.8 64.5,30.1 65.9,35.3 66.5,41 66.4,44 65.5,50.1 63.6,56.2 60.8,62 57.1,67.4 52.8,72.1 47.9,76 42.8,78.9 37.6,80.7 32.5,81.4 27.7,81.1 23.6,79.8 20.2,77.5 17.7,74.5 16.3,70.8 16,66.8 17,62.5 19,58.2 22.3,54.2 26.5,50.6 31.5,47.5 37.3,45.3 43.5,43.9 50,43.4" fill="none" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="50" cy="55.8" r="2.2" fill="#F0C987"/>
+      </svg>
+      <div>
+        <div class="footer-brand-name">Thread &amp; Core Systems</div>
+        <div class="footer-brand-tag">SAP BTP · Enterprise Field Operations</div>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:contact@threadandcore.com">contact@threadandcore.com</a><br>
+      +91 7875046852 · threadandcore.com
+    </div>
+  </div>
+
+  <div class="footer-confidential">
+    Confidential capability overview. Client identity withheld under confidentiality agreement. Demonstration uses representative data.
+  </div>
+
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img src="founder-photo.jpg" alt="Prashant Agarwal — Founder">
+</div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lightbox').classList.remove('active')});
+</script>
+</body>
+</html>
